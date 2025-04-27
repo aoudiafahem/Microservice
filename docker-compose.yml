@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: sql_injection
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  auth_service:
+    build: ./auth_service
+    ports:
+      - "8001:8001"
+    environment:
+    - service_email=dzjob10@gmail.com
+    - service_password=ifvwyawfscccgqif
+    depends_on:
+      - mysql
+
+  api_gateway:
+    build: ./api_gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - auth_service
+      - prediction_service
+
+  prediction_service:
+    build: ./prediction_service
+    ports:
+      - "8002:8002"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api_gateway
+
+volumes:
+  mysql_data:

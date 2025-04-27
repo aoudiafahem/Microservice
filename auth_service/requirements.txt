@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pydantic
+aiosmtplib
+python-multipart
+email-validator
+motor
+mysqlclient
+sqlalchemy
+alembic
+pyjwt
+passlib[bcrypt]
+pymysql
+cryptography
