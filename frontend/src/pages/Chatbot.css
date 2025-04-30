@@ -1,0 +1,239 @@
+.chatbot-container {
+  width: 350px;
+  height: 500px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Minimized mode */
+.chatbot-container.minimized {
+  height: 60px;
+  width: 200px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  gap: 10px;
+  justify-content: space-between;
+  min-height: 60px;
+}
+
+.bot-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.chat-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.status-indicator.active {
+  background: #4caf50;
+  animation: pulse 1.5s infinite;
+}
+
+.minimize-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+}
+
+.minimize-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.chat-window {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: #f5f7fb;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-message {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  max-width: 85%;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.chat-message.ai {
+  align-self: flex-start;
+}
+
+.message-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #6e8efb;
+  color: white;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.chat-message.ai .message-avatar {
+  background: #a777e3;
+}
+
+.message-content {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #333333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  word-break: break-word;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.chat-message.user .message-content {
+  background: #6e8efb;
+  color: white;
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 6px 0;
+}
+
+.typing-indicator span {
+  width: 6px;
+  height: 6px;
+  background: #a777e3;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.chat-input-area {
+  display: flex;
+  padding: 12px;
+  background: #ffffff;
+  border-top: 1px solid #eeeeee;
+  gap: 8px;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #dddddd;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.chat-input-area input:focus {
+  border-color: #a777e3;
+  box-shadow: 0 0 0 2px rgba(167, 119, 227, 0.2);
+}
+
+.send-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.send-button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-3px); }
+}
+
+/* Minimized state content */
+.chatbot-container.minimized .chat-header h3 {
+  font-size: 14px;
+}
+
+.chatbot-container.minimized .bot-icon {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+}
+
+.chatbot-container.minimized .minimize-button {
+  font-size: 14px;
+}

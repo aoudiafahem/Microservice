@@ -1,0 +1,7 @@
+fastapi==0.95.0
+uvicorn==0.21.0
+langchain==0.0.200
+openai==1.76.2
+python-dotenv==1.0.0
+httpx==0.24.0
+anyio==3.7.1 
