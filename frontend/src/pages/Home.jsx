@@ -3,6 +3,7 @@ import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FiUpload, FiLogOut, FiCheckCircle } from "react-icons/fi";
+import Chatbot from "./chatbot"; // تأكد من تطابق الاسم مع الملف
 
 const Home = () => {
   const { user, logout } = useAuth();
@@ -64,34 +65,30 @@ const Home = () => {
 
           <div className="upload-card">
             <h2 className="upload-title">Upload a Plant Leaf Image</h2>
-            
+
             <label className="upload-area">
               <div className="upload-icon">
                 <FiUpload />
               </div>
               <p>Click to browse or drag & drop your image</p>
-              <input 
-                type="file" 
-                className="file-input" 
-                accept="image/*" 
-                onChange={handleFileChange} 
+              <input
+                type="file"
+                className="file-input"
+                accept="image/*"
+                onChange={handleFileChange}
               />
             </label>
 
             {previewUrl && (
               <div className="preview-container">
-                <img 
-                  src={previewUrl} 
-                  alt="Preview" 
-                  className="preview-image" 
-                />
+                <img src={previewUrl} alt="Preview" className="preview-image" />
               </div>
             )}
 
-            <div style={{ textAlign: 'center' }}>
-              <button 
+            <div style={{ textAlign: "center" }}>
+              <button
                 className="btn btn-primary"
-                onClick={handleUpload} 
+                onClick={handleUpload}
                 disabled={loading || !selectedFile}
               >
                 {loading ? (
@@ -110,16 +107,18 @@ const Home = () => {
               <h2 className="result-title">
                 <FiCheckCircle /> Prediction Result
               </h2>
-              <p className="result-text">{prediction.replace(/_/g, ' ')}</p>
+              <p className="result-text">{prediction.replace(/_/g, " ")}</p>
             </div>
           )}
+
+          <Chatbot />
         </>
       ) : (
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+        <div style={{ textAlign: "center", marginTop: "3rem" }}>
           <p>You are not logged in.</p>
-          <div style={{ marginTop: '1rem' }}>
+          <div style={{ marginTop: "1rem" }}>
             <a href="/login" className="btn btn-primary">Login</a>
-            <a href="/register" className="btn btn-primary" style={{ marginLeft: '1rem' }}>Register</a>
+            <a href="/register" className="btn btn-primary" style={{ marginLeft: "1rem" }}>Register</a>
           </div>
         </div>
       )}
